@@ -20,6 +20,9 @@ Template.connections.helpers({
   authenticationMethod(...methods) {
     return methods.indexOf(Connection.selectedAuthType.get()) !== -1;
   },
+  saveCredentials: function () {
+    return Connection.saveCredentials();
+  }
 });
 
 Template.connections.events({
@@ -72,6 +75,17 @@ Template.connections.events({
     Connection.selectedAuthType.set(authType);
     if (authType === 'mongodb_x509') sslTab.removeAttr('data-toggle');
     else sslTab.attr('data-toggle', 'tab');
+    
+    const inputUser = $('#inputUser');
+    const inputPassword = $('#inputPassword');
+    // eslint-disable-next-line no-cond-assign
+    if (Connection.saveCredentials === true) {
+      inputUser.prop('disabled', true);
+      inputPassword.prop('disabled', true);
+    } else {
+      inputUser.prop('disabled', false);
+      inputPassword.prop('disabled', false);
+    }
   },
 
   'click .addHost': function () {

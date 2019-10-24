@@ -9,6 +9,7 @@ require('bootstrap-filestyle');
 
 const Connection = function () {
   this.selectedAuthType = ConnectionHelper.selectedAuthType;
+  this.saveCredentials = true;
 };
 
 const sortArrayByName = function (obj) {

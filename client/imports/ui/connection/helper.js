@@ -80,6 +80,7 @@ ConnectionHelper.prototype = {
         $('#anchorConnectionSsl').removeAttr('data-toggle');
         $('#inputX509Username').val(connection.mongodb_x509.username);
       }
+      if (connection.saveCredentials === true) this.disableFormsForCredentials();
     }, 150);
   },
 
@@ -327,6 +328,12 @@ ConnectionHelper.prototype = {
     $('#spanUseSSL').show();
 
     $('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  disableFormsForCredentials() {
+    $('#inputUser, #inputPassword, #inputLdapUsername, #inputLdapPassword, #inputKerberosUsername, #inputKerberosPassword, #inputKerberosServiceName, #inputX509Username')
+      .prop('disabled', true)
+      .attr('data-original-title', 'Credentials can not save due settings!');
   },
 
   enableFormsForUri() {
